@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { withBasePath } from "@/utils/base";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+const destination = project.data.demo || project.data.repo || "#";
+const isExternal = destination.startsWith("http");
+const coverSrc = project.data.cover.startsWith("/")
+  ? withBasePath(project.data.cover)
+  : project.data.cover;
+---
+
+<article class="project-card" style={`--delay: ${index * 90}ms`}>
+  <a
+    class="project-card__link"
+    href={destination}
+    target={isExternal ? "_blank" : undefined}
+    rel={isExternal ? "noreferrer" : undefined}
+    aria-label={`${project.data.title}: ${project.data.cta}`}
+  >
+    <figure class="project-card__media">
+      <img src={coverSrc} alt={project.data.coverAlt} loading={index > 1 ? "lazy" : "eager"} />
+    </figure>
+    <div class="project-card__body">
+      <div class="project-card__meta">
+        <span>{project.data.type}</span>
+        <span>{project.data.cta}</span>
+      </div>
+      <h3>{project.data.title}</h3>
+      <p>{project.data.summary}</p>
+      <div class="project-card__tags" aria-label="Tecnologias">
+        {project.data.stack.map((item) => <span>{item}</span>)}
+      </div>
+    </div>
+  </a>
+</article>

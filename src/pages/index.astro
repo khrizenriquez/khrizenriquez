@@ -1,0 +1,71 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import ThemeToggle from "@/components/ThemeToggle.astro";
+import { es } from "@/i18n/es";
+import { withBasePath } from "@/utils/base";
+import { profileLinks } from "@/utils/links";
+
+const projects = (await getCollection("projects"))
+  .filter((project) => project.data.featured && project.data.language === "es")
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 5);
+
+const homeHref = withBasePath("");
+---
+
+<BaseLayout>
+  <main class="portfolio-shell">
+    <header class="hero portfolio-hero">
+      <nav class="portfolio-nav" aria-label="Principal">
+        <a class="portfolio-mark" href={homeHref}>{es.hero.name}</a>
+        <div class="portfolio-nav__actions">
+          <a href="#projects">{es.nav.projects}</a>
+          <a href={`mailto:${profileLinks.email.replace("mailto:", "")}`}>{es.nav.contact}</a>
+          <ThemeToggle />
+        </div>
+      </nav>
+
+      <section class="hero-body portfolio-hero__body">
+        <div class="container">
+          <p class="eyebrow">{es.hero.eyebrow}</p>
+          <h1>{es.hero.name}</h1>
+          <p class="role">{es.hero.role}</p>
+          <p class="hero-summary">{es.hero.summary}</p>
+          <div class="hero-links">
+            <a class="button is-dark is-rounded" href={profileLinks.linkedin} target="_blank" rel="noreferrer">
+              {es.links.linkedin}
+            </a>
+            <a class="button is-light is-rounded" href={profileLinks.github} target="_blank" rel="noreferrer">
+              {es.links.github}
+            </a>
+            <a class="button is-text" href={profileLinks.email}>
+              {es.links.email}
+            </a>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <section class="section project-section" id="projects">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">{es.projects.heading}</p>
+          <h2>{es.projects.kicker}</h2>
+        </div>
+        <div class="project-grid">
+          {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+        </div>
+      </div>
+    </section>
+
+    <footer class="portfolio-footer">
+      <p>{es.footer.note}</p>
+      <div>
+        <a href={profileLinks.github} target="_blank" rel="noreferrer">{es.links.github}</a>
+        <a href={profileLinks.linkedin} target="_blank" rel="noreferrer">{es.links.linkedin}</a>
+      </div>
+    </footer>
+  </main>
+</BaseLayout>
