@@ -19,8 +19,8 @@ export const es = {
     email: "Email",
   },
   projects: {
-    heading: "Trabajo seleccionado",
-    kicker: "Cinco piezas para mostrar entrega, criterio técnico y curiosidad aplicada.",
+    heading: "Proyectos",
+    kicker: "Un recorrido por repositorios, experimentos, productos y soluciones web.",
     searchLabel: "Buscar proyectos",
     searchPlaceholder: "Buscar por tag, título, descripción o repo",
     searchHelp: "Filtra por stack, tipo, descripción o enlaces del proyecto.",
