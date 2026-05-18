@@ -8,11 +8,11 @@ import { withBasePath } from "@/utils/base";
 import { profileLinks } from "@/utils/links";
 
 const projects = (await getCollection("projects"))
-  .filter((project) => project.data.featured && project.data.language === "es")
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 5);
+  .filter((project) => project.data.language === "es")
+  .sort((a, b) => a.data.order - b.data.order);
 
 const homeHref = withBasePath("");
+const projectCountLabel = projects.length === 1 ? es.projects.countSingular : es.projects.countPlural;
 ---
 
 <BaseLayout>
@@ -54,8 +54,32 @@ const homeHref = withBasePath("");
           <p class="eyebrow">{es.projects.heading}</p>
           <h2>{es.projects.kicker}</h2>
         </div>
+        <div class="project-search" role="search">
+          <label class="project-search__label" for="project-search">{es.projects.searchLabel}</label>
+          <div class="project-search__control">
+            <input
+              class="input project-search__input"
+              id="project-search"
+              type="search"
+              placeholder={es.projects.searchPlaceholder}
+              autocomplete="off"
+              data-project-search
+            />
+            <button class="button project-search__clear" type="button" data-project-search-clear hidden>
+              {es.projects.clearSearch}
+            </button>
+          </div>
+          <div class="project-search__meta">
+            <span data-project-search-count>{projects.length} {projectCountLabel}</span>
+            <span>{es.projects.searchHelp}</span>
+          </div>
+        </div>
         <div class="project-grid">
           {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+        </div>
+        <div class="project-empty" data-project-empty hidden>
+          <h3>{es.projects.emptyTitle}</h3>
+          <p>{es.projects.emptyBody}</p>
         </div>
       </div>
     </section>
@@ -69,3 +93,52 @@ const homeHref = withBasePath("");
     </footer>
   </main>
 </BaseLayout>
+
+<script>
+  const searchInput = document.querySelector("[data-project-search]");
+  const clearButton = document.querySelector("[data-project-search-clear]");
+  const countElement = document.querySelector("[data-project-search-count]");
+  const emptyState = document.querySelector("[data-project-empty]");
+  const cards = Array.from(document.querySelectorAll("[data-project-card]"));
+
+  const normalize = (value: string) =>
+    value
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim();
+
+  const updateProjects = () => {
+    if (!(searchInput instanceof HTMLInputElement)) return;
+
+    const query = normalize(searchInput.value);
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const searchableText = normalize(card.getAttribute("data-search-index") || "");
+      const matches = !query || searchableText.includes(query);
+      card.toggleAttribute("hidden", !matches);
+      if (matches) visibleCount += 1;
+    });
+
+    if (countElement) {
+      countElement.textContent = `${visibleCount} ${visibleCount === 1 ? "proyecto" : "proyectos"}`;
+    }
+
+    if (emptyState) {
+      emptyState.toggleAttribute("hidden", visibleCount > 0);
+    }
+
+    if (clearButton) {
+      clearButton.toggleAttribute("hidden", query.length === 0);
+    }
+  };
+
+  searchInput?.addEventListener("input", updateProjects);
+  clearButton?.addEventListener("click", () => {
+    if (!(searchInput instanceof HTMLInputElement)) return;
+    searchInput.value = "";
+    searchInput.focus();
+    updateProjects();
+  });
+</script>

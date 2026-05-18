@@ -6,7 +6,7 @@ Spec: `docs/superpowers/specs/2026-05-14-personal-portfolio-design.md`
 
 ## Goal
 
-Ship the first static portfolio release for GitHub Pages: a single visual home page with five curated projects, Markdown-managed content, Bulma styling, a light/dark toggle, prepared analytics, and GitHub Actions deployment.
+Ship the first static portfolio release for GitHub Pages: a single visual home page with curated Markdown-managed projects, a lightweight project search, Bulma styling, a light/dark toggle, prepared analytics, and GitHub Actions deployment.
 
 ## Phases
 
@@ -24,6 +24,7 @@ Ship the first static portfolio release for GitHub Pages: a single visual home p
 3. Build the interface
    - Create the home page.
    - Build project gallery components.
+   - Add client-side search for title, summary, type, stack tags, repository URL, and demo URL.
    - Add visible light/dark toggle.
    - Add desktop-first animation with reduced mobile motion.
    - Keep i18n structure internal; do not show language selector.
@@ -43,7 +44,8 @@ Ship the first static portfolio release for GitHub Pages: a single visual home p
 
 - `npm run build` succeeds.
 - Home page renders at the configured base path.
-- Five featured projects render from Markdown.
+- All Spanish project entries render from Markdown.
+- Search filters projects by title, summary, type, stack tags, repository URL, and demo URL.
 - Project cards link to demo or GitHub.
 - Theme toggle works and stores explicit choice in local storage.
 - Mobile layout is clean and less animated than desktop.

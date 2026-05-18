@@ -13,9 +13,20 @@ const isExternal = destination.startsWith("http");
 const coverSrc = project.data.cover.startsWith("/")
   ? withBasePath(project.data.cover)
   : project.data.cover;
+const searchIndex = [
+  project.data.title,
+  project.data.slug,
+  project.data.summary,
+  project.data.type,
+  project.data.stack.join(" "),
+  project.data.repo,
+  project.data.demo,
+]
+  .filter(Boolean)
+  .join(" ");
 ---
 
-<article class="project-card" style={`--delay: ${index * 90}ms`}>
+<article class="project-card" style={`--delay: ${index * 90}ms`} data-project-card data-search-index={searchIndex}>
   <a
     class="project-card__link"
     href={destination}

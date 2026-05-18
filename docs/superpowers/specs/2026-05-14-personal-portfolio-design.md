@@ -27,7 +27,8 @@ Included in V1:
 - Short professional, approachable positioning copy in Spanish.
 - External links to LinkedIn, GitHub, and email.
 - Visible light/dark theme toggle.
-- Visual gallery of five featured projects.
+- Visual gallery of all Spanish project entries available in Markdown.
+- Simple client-side project search by title, summary, type, stack tags, repository URL, and demo URL.
 - Each project card links directly to the best external destination: demo first when available, otherwise GitHub.
 - Project content sourced from Markdown.
 - Spanish content for launch.
@@ -67,6 +68,8 @@ The first viewport should communicate:
 - Theme toggle.
 
 The project area should use large visual cards with screenshots or representative images. Text on each project should be brief: title, short context line, stack tags, and CTA. The gallery should prioritize visual scanning over long descriptions.
+
+The gallery should include a small search control before the cards. Search runs entirely in the browser and filters the single-page gallery by project title, summary, type, stack tags, repository URL, and demo URL. It should show a result count, provide a clear action, and display a simple empty state when nothing matches.
 
 Motion should be expressive on desktop:
 
@@ -108,7 +111,7 @@ cta: "Ver repositorio"
 
 The body can hold future case-study content, even though V1 only uses frontmatter and a short excerpt.
 
-The home page should query featured Spanish projects, sort by `order`, and render the first five. The chosen projects are editorial, not automatically selected by GitHub activity.
+The home page should query Spanish projects, sort by `order`, and render all available entries on the same page. The chosen projects are editorial, not automatically selected by GitHub activity.
 
 Initial seed projects:
 

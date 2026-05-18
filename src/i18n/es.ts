@@ -21,6 +21,14 @@ export const es = {
   projects: {
     heading: "Trabajo seleccionado",
     kicker: "Cinco piezas para mostrar entrega, criterio técnico y curiosidad aplicada.",
+    searchLabel: "Buscar proyectos",
+    searchPlaceholder: "Buscar por tag, título, descripción o repo",
+    searchHelp: "Filtra por stack, tipo, descripción o enlaces del proyecto.",
+    clearSearch: "Limpiar",
+    emptyTitle: "No hay proyectos con ese filtro.",
+    emptyBody: "Prueba con otro stack, nombre o palabra clave.",
+    countSingular: "proyecto",
+    countPlural: "proyectos",
   },
   theme: {
     toggleLabel: "Cambiar tema",
