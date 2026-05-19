@@ -67,7 +67,7 @@ The first viewport should communicate:
 - Primary links: LinkedIn, GitHub, email.
 - Theme toggle.
 
-The project area should use large visual cards with screenshots or representative images. Text on each project should be brief: title, short context line, stack tags, and CTA. The gallery should prioritize visual scanning over long descriptions and should not describe the section as a fixed set of five selected projects.
+The project area should use large visual cards with screenshots or representative images. Text on each project should be brief: title, short context line, stack tags, and CTA. The gallery should prioritize visual scanning over long descriptions and should not include a large editorial headline above the search control.
 
 The gallery should include a small search control before the cards. Search runs entirely in the browser and filters the single-page gallery by project title, summary, type, stack tags, repository URL, and demo URL. It should show a result count, provide a clear action, and display a simple empty state when nothing matches.
 

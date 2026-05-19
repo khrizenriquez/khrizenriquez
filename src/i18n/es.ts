@@ -20,11 +20,11 @@ export const es = {
   },
   projects: {
     heading: "Proyectos",
-    kicker: "Un recorrido por repositorios, experimentos, productos y soluciones web.",
     searchLabel: "Buscar proyectos",
-    searchPlaceholder: "Buscar por tag, título, descripción o repo",
+    searchPlaceholder: "Buscar proyectos",
     searchHelp: "Filtra por stack, tipo, descripción o enlaces del proyecto.",
     clearSearch: "Limpiar",
+    scrollCta: "Ver proyectos ↓",
     emptyTitle: "No hay proyectos con ese filtro.",
     emptyBody: "Prueba con otro stack, nombre o palabra clave.",
     countSingular: "proyecto",

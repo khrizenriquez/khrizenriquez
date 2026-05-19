@@ -18,8 +18,24 @@ const projectCountLabel = projects.length === 1 ? es.projects.countSingular : es
 <BaseLayout>
   <main class="portfolio-shell">
     <header class="hero portfolio-hero">
-      <nav class="portfolio-nav" aria-label="Principal">
-        <a class="portfolio-mark" href={homeHref}>{es.hero.name}</a>
+      <nav class="portfolio-nav" aria-label="Principal" data-portfolio-nav>
+        <a class="portfolio-mark" href={homeHref} data-portfolio-mark aria-label="Inicio">
+          {es.hero.name}
+        </a>
+        <div class="nav-search" role="search">
+          <label class="sr-only" for="project-search">{es.projects.searchLabel}</label>
+          <input
+            class="input nav-search__input"
+            id="project-search"
+            type="search"
+            placeholder={es.projects.searchPlaceholder}
+            autocomplete="off"
+            data-project-search
+          />
+          <button class="button nav-search__clear" type="button" data-project-search-clear hidden>
+            {es.projects.clearSearch}
+          </button>
+        </div>
         <div class="portfolio-nav__actions">
           <a href="#projects">{es.nav.projects}</a>
           <a href={`mailto:${profileLinks.email.replace("mailto:", "")}`}>{es.nav.contact}</a>
@@ -28,7 +44,7 @@ const projectCountLabel = projects.length === 1 ? es.projects.countSingular : es
       </nav>
 
       <section class="hero-body portfolio-hero__body">
-        <div class="container">
+        <div class="container hero-content" data-hero-content>
           <p class="eyebrow">{es.hero.eyebrow}</p>
           <h1>{es.hero.name}</h1>
           <p class="role">{es.hero.role}</p>
@@ -43,36 +59,19 @@ const projectCountLabel = projects.length === 1 ? es.projects.countSingular : es
             <a class="button is-text" href={profileLinks.email}>
               {es.links.email}
             </a>
+            <a class="button scroll-action" href="#projects">
+              {es.projects.scrollCta}
+            </a>
           </div>
         </div>
       </section>
     </header>
 
     <section class="section project-section" id="projects">
-      <div class="container">
+      <div class="projects-frame">
         <div class="section-heading">
           <p class="eyebrow">{es.projects.heading}</p>
-          <h2>{es.projects.kicker}</h2>
-        </div>
-        <div class="project-search" role="search">
-          <label class="project-search__label" for="project-search">{es.projects.searchLabel}</label>
-          <div class="project-search__control">
-            <input
-              class="input project-search__input"
-              id="project-search"
-              type="search"
-              placeholder={es.projects.searchPlaceholder}
-              autocomplete="off"
-              data-project-search
-            />
-            <button class="button project-search__clear" type="button" data-project-search-clear hidden>
-              {es.projects.clearSearch}
-            </button>
-          </div>
-          <div class="project-search__meta">
-            <span data-project-search-count>{projects.length} {projectCountLabel}</span>
-            <span>{es.projects.searchHelp}</span>
-          </div>
+          <p class="project-count" data-project-search-count>{projects.length} {projectCountLabel}</p>
         </div>
         <div class="project-grid">
           {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
@@ -99,6 +98,8 @@ const projectCountLabel = projects.length === 1 ? es.projects.countSingular : es
   const clearButton = document.querySelector("[data-project-search-clear]");
   const countElement = document.querySelector("[data-project-search-count]");
   const emptyState = document.querySelector("[data-project-empty]");
+  const nav = document.querySelector("[data-portfolio-nav]");
+  const heroContent = document.querySelector("[data-hero-content]");
   const cards = Array.from(document.querySelectorAll("[data-project-card]"));
 
   const normalize = (value: string) =>
@@ -141,4 +142,15 @@ const projectCountLabel = projects.length === 1 ? es.projects.countSingular : es
     searchInput.focus();
     updateProjects();
   });
+
+  const updateHeroScroll = () => {
+    if (!(heroContent instanceof HTMLElement)) return;
+
+    const progress = Math.min(window.scrollY / 420, 1);
+    heroContent.style.setProperty("--hero-parallax", `${Math.round(window.scrollY * -0.12)}px`);
+    nav?.toggleAttribute("data-scrolled", progress > 0.28);
+  };
+
+  updateHeroScroll();
+  window.addEventListener("scroll", updateHeroScroll, { passive: true });
 </script>
