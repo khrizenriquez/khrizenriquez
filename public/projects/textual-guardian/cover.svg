@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-label="Textual Guardian cover">
+  <rect width="1400" height="900" fill="#ece7dc"/>
+  <rect x="120" y="92" width="1160" height="716" rx="26" fill="#172027"/>
+  <path d="M210 206h456M210 274h760M210 342h634M210 410h728M210 478h520M210 546h650M210 614h420" stroke="#ece7dc" stroke-width="26" stroke-linecap="round"/>
+  <path d="M710 274h260M574 478h156M480 614h150" stroke="#d94f3d" stroke-width="28" stroke-linecap="round"/>
+  <rect x="906" y="548" width="224" height="84" rx="42" fill="#0f7d6f"/>
+  <path d="M965 590l34 34 76-88" fill="none" stroke="#ece7dc" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+

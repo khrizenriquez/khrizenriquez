@@ -1,0 +1,35 @@
+---
+import { es } from "@/i18n/es";
+---
+
+<button class="theme-toggle button is-rounded is-small" type="button" aria-label={es.theme.toggleLabel} data-theme-toggle>
+  <span class="theme-toggle__track" aria-hidden="true">
+    <span class="theme-toggle__thumb"></span>
+  </span>
+  <span class="theme-toggle__text" data-theme-toggle-label>{es.theme.light}</span>
+</button>
+
+<script>
+  const root = document.documentElement;
+  const button = document.querySelector("[data-theme-toggle]");
+  const label = document.querySelector("[data-theme-toggle-label]");
+  const storageKey = "khrizenriquez-theme";
+
+  const getSystemTheme = () =>
+    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
+  const setTheme = (theme: string, persist = false) => {
+    root.dataset.theme = theme;
+    if (label) label.textContent = theme === "dark" ? "Oscuro" : "Claro";
+    if (persist) localStorage.setItem(storageKey, theme);
+  };
+
+  const savedTheme = localStorage.getItem(storageKey);
+  setTheme(savedTheme || getSystemTheme());
+
+  button?.addEventListener("click", () => {
+    const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme, true);
+  });
+</script>
+

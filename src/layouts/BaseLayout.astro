@@ -1,0 +1,40 @@
+---
+import "bulma/css/bulma.min.css";
+import "@/styles/global.css";
+import Analytics from "@/components/Analytics.astro";
+import { es } from "@/i18n/es";
+import { withBasePath } from "@/utils/base";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = es.siteTitle,
+  description = es.siteDescription,
+} = Astro.props;
+
+const faviconPath = withBasePath("favicon.svg");
+---
+
+<!doctype html>
+<html lang="es" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.url} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href={faviconPath} />
+    <title>{title}</title>
+    <Analytics />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
