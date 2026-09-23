@@ -10,14 +10,15 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "sync:repos": "node scripts/sync-github-projects.mjs"
   },
   "dependencies": {
-    "astro": "^6.3.3",
+    "astro": "^7.3.4",
     "bulma": "^1.0.4"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.2",
+    "@astrojs/check": "^0.9.10",
     "typescript": "^5.9.3"
   },
   "overrides": {

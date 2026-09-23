@@ -71,6 +71,16 @@ Runs `astro check` and builds the static site into `dist/`.
 npm run preview
 ```
 
+Sync public repositories from GitHub into Markdown project entries:
+
+```bash
+npm run sync:repos
+```
+
+The sync only creates entries for repositories that are not already present in
+`src/content/projects/`. Existing entries, including curated descriptions and
+covers, are preserved.
+
 Serves the production build locally.
 
 ## Project Structure
@@ -207,4 +217,3 @@ The project uses an npm override for `yaml` so transitive development tooling re
 - `old_version/` is intentionally ignored by Git and kept only as local migration source material.
 - Custom domain support is not enabled in v1. No `CNAME` file is included yet.
 - Project covers can be replaced under `public/projects/<slug>/`.
-
