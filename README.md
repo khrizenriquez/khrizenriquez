@@ -180,6 +180,8 @@ The workflow:
 4. Deploys to GitHub Pages.
 
 In GitHub repository settings, Pages should use **GitHub Actions** as the source.
+Do not use **Deploy from a branch**: that mode runs Jekyll against the repository
+root and cannot parse Astro files.
 
 ## Branching Workflow
 
